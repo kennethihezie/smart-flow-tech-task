@@ -6,6 +6,7 @@ import com.example.smartflow.network.SmartFlowAPiService
 import com.example.smartflow.network.SmartFlowInterceptor
 import com.example.smartflow.repository.SmartFlowRepository
 import com.example.smartflow.viewmodel.SmartFlowViewModel
+import com.example.smartflow.viewmodel.SmartFlowViewModelFactory
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -18,6 +19,7 @@ import org.koin.dsl.module
 
 val appModule = module {
     single { SmartFlowRepository(get(), get()) }
+    single { SmartFlowViewModelFactory(get()) }
     viewModel { SmartFlowViewModel(get()) }
 }
 

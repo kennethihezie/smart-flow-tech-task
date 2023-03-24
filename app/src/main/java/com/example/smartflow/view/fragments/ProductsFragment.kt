@@ -27,8 +27,8 @@ import org.koin.android.ext.android.inject
  */
 
 class ProductsFragment : Fragment() {
-    private val smartFlowRepository: SmartFlowRepository by inject()
-    private val smartFlowViewModel: SmartFlowViewModel by viewModels { SmartFlowViewModelFactory(smartFlowRepository) }
+    private val smartFlowViewModelFactory: SmartFlowViewModelFactory by inject()
+    private val smartFlowViewModel: SmartFlowViewModel by viewModels { smartFlowViewModelFactory }
 
     private lateinit var binding: ProductsFragmentBinding
     private lateinit var adapter: SuggestedItemsAdapter
@@ -49,8 +49,7 @@ class ProductsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//       binding.progressBar.visibility = View.VISIBLE
-        binding.container.visibility = View.VISIBLE
+       binding.progressBar.visibility = View.VISIBLE
 
         initAdapter()
 
@@ -66,7 +65,7 @@ class ProductsFragment : Fragment() {
 
         binding.verticalItems.adapter = vAdapter
         binding.verticalItems.layoutManager = LinearLayoutManager(requireContext())
-
+        binding.verticalItems.isNestedScrollingEnabled = false
     }
 
 
@@ -75,9 +74,6 @@ class ProductsFragment : Fragment() {
             withContext(Dispatchers.Main){
                 smartFlowViewModel.data.collectLatest {
                     vAdapter.submitData(it)
-
-                    binding.container.visibility = View.VISIBLE
-                    binding.progressBar.visibility = View.GONE
                 }
             }
         }
@@ -86,6 +82,8 @@ class ProductsFragment : Fragment() {
             val products = smartFlowViewModel.getProducts()
             withContext(Dispatchers.Main){
                 if(products.isNotEmpty()){
+                    binding.container.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
                     adapter.setProducts(products)
                 }
             }

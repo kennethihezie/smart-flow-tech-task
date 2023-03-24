@@ -80,6 +80,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp">
@@ -139,9 +140,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
     <ProgressBar
         android:id="@+id/progressBar"
