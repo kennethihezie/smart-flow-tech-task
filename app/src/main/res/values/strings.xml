@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SmartFlow</string>
+    <string name="suggested_products">Suggested brands for you.</string>
+    <string name="products">All Brands</string>
+</resources>
