@@ -54,6 +54,8 @@ class ProductsFragment : Fragment() {
         initAdapter()
 
         registerProductsObserver()
+
+        val a = "j"
     }
 
     private fun initAdapter(){
