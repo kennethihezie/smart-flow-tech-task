@@ -19,3 +19,6 @@ jobs:
 
       - name: Build and generate APK
         run: ./gradlew assembleDebug
+        with:
+          name: apk
+          path: app/build/outputs/apk/debug/app-debug.apk
