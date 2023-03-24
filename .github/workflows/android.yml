@@ -2,20 +2,25 @@ name: Android Build
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  build:
+  apk:
+    name: Generate APK
+    needs: test
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up JDK 11
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 11
-
-      - name: Build and generate APK
-        run: ./gradlew assembleDebug
+          java-version: 1.8
+      - name: Build APK
+        run: bash ./gradlew assembleDebug --stacktrace
+      - name: Upload APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: apk
+          path: app/build/outputs/apk/debug/app-debug.apk
